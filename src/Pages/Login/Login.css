@@ -1,0 +1,80 @@
+*{
+    font-family: sans-serif;
+}
+body {
+    background: radial-gradient(rgba(0,14,102,1) 0%, rgba(47,0,66,1) 100%);
+}
+h1 {
+    font-family: Sans-serif;
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
+    font-size: 45px 
+}
+.Login {
+    text-align: center;
+    background: rgba(75,0,105,0.3);
+    margin: 100px 30%;
+    padding: 30px 0px 40px 0px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.7);
+    height: 100%;
+}
+input {
+    background: rgba(255,255,255,0.25);
+    color: white;
+    margin-top: 10px;
+    width: 90%;
+    height: 30px;
+    border: hidden;
+    border-radius: 20px;
+    text-indent: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.7);
+}
+::placeholder {
+    color: rgba(255,255,255,0.65) 
+}
+.InputButtonDiv {
+    display: inline-box;
+    margin-top: 20px;
+}
+.InputButton {
+    color: rgba(250,250,250,1);
+    background: rgba(208, 89, 255, 0.5);
+    margin-left: 34%;
+    width: 30%;
+    height: 30px;
+    border: hidden;
+    border-radius: 20px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.7);
+    margin-right: 350px;
+    margin-bottom: 10px;
+}
+.ForgotButton {
+    color: rgba(250,250,250,1);
+    opacity: 0.8;
+    background: none;
+    border: hidden;
+    font-size: 13px;
+    padding: 10px;
+}
+.InputButton:hover {
+    opacity: 0.8;
+    transition: 0.2s;
+}
+.ForgotButton:hover {
+    opacity: 1;
+    transition: 0.2s;
+    text-decoration: underline;
+}
+.ForgotButton2 {
+    color: rgba(250,250,250,1);
+    opacity: 0.8;
+    background: none;
+    border: hidden;
+    font-size: 13px;
+}
+.ForgotButton2:hover {
+    opacity: 1;
+    transition: 0.2s;
+    text-decoration: underline;
+}

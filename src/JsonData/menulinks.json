@@ -1,0 +1,4 @@
+[
+    { "path": "/",        "label": "Login",     "component": "Login" },
+    { "path": "/login",        "label": "Login",     "component": "Login" }
+]
