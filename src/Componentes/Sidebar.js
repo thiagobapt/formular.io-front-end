@@ -20,7 +20,7 @@ const Sidebar = () => {
         '& .MuiDrawer-paper': {
           width: open ? 240 : 60,
           boxSizing: 'border-box',
-          backgroundColor: 'lavender',
+          backgroundColor: '#9e7be3',
           transition: 'width 0.3s',
           overflowX: 'hidden' , // Adicionado para evitar a barra de rolagem horizontal
           borderRadius: '0 15px 15px 0'
@@ -28,42 +28,42 @@ const Sidebar = () => {
         },
       }}
     >
-      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', p: 2 }}>
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', p: 2}}>
         {open && (
-          <Typography variant="h6" noWrap sx={{ flexGrow: 1, textAlign: 'center' }}>
+          <Typography variant="h6" noWrap sx={{ flexGrow: 1, textAlign: 'center', color: 'white' , fontFamily:'sans-serif', fontSize:'30px'}}>
             Formulário
           </Typography>
         )}
         <IconButton onClick={handleDrawerToggle}>
-          {open ? <ChevronLeftIcon /> : <MenuIcon />}
+          {open ? <ChevronLeftIcon style={{color:'white'}} /> : <MenuIcon  style={{color:'white'}}/>}
         </IconButton>
       </Box>
       <Divider />
       <List>
         <ListItem button>
           <ListItemIcon>
-            <AddBox />
+            <AddBox style={{color:'white'}} />
           </ListItemIcon>
-          {open && <ListItemText primary="Criar Formulário" />}
+          {open && <ListItemText primary="Criar Formulário" style={{color:'white'}} />}
         </ListItem>
         <ListItem button>
           <ListItemIcon>
-            <ListAlt />
+            <ListAlt style={{color:'white'}} />
           </ListItemIcon>
-          {open && <ListItemText primary="Meus Formulários" />}
+          {open && <ListItemText primary="Meus Formulários" style={{color:'white'}} />}
         </ListItem>
         <ListItem button>
           <ListItemIcon>
-            <AssignmentTurnedIn />
-          </ListItemIcon>
-          {open && <ListItemText primary="Formulários Respondidos" />}
+            <AssignmentTurnedIn style={{color:'white'}} />
+          </ListItemIcon >
+          {open && <ListItemText primary="Formulários Respondidos" style={{color:'white'}} />}
         </ListItem>
       </List>
       <Box sx={{ position: 'absolute', bottom: 0, width: '100%' }}>
-        <Button startIcon={<AccountCircle />} fullWidth>
+        <Button startIcon={<AccountCircle />} fullWidth style={{color:'white'}}>
           {open && "Perfil"}
         </Button>
-        <Button startIcon={<ExitToApp />} fullWidth onClick={() => console.log('Redirecionando...')}>
+        <Button startIcon={<ExitToApp />} fullWidth onClick={() => console.log('Redirecionando...')} style={{color:'white'}}>
           {open && "Sair"}
         </Button>
       </Box>
