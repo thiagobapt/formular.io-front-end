@@ -53,7 +53,9 @@ const Form = ({ id, removeForm }) => {
           </RadioGroup>
         </>
       ) : (
-        <TextField placeholder="Pergunta sem título" variant="outlined" margin="normal" style={{ width: '100%' }} />
+        <TextField placeholder="Texto para resposta" variant="outlined" margin="normal" style={{ width: '100%' }}             InputProps={{
+          readOnly: true,
+        }}/>
       )}
       <div style={{ display: 'flex', alignItems: 'center', marginTop: '16px' }}>
         <FormControlLabel control={<Switch />} label="Obrigatório" />
