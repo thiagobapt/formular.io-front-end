@@ -10,12 +10,17 @@ const AnsweredForms = () => {
     // Adicione mais formulários conforme necessário
   ];
 
+  const handleOpenFormularIO = () => {
+    window.open('/formular-io', '_blank');
+  };
+
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', padding: '16px' }}>
       {forms.map(form => (
         <Card
           key={form.id}
-          sx={{ width: 200, margin: '16px', padding: '16px', cursor: 'default' }}
+          sx={{ width: 200, margin: '16px', padding: '16px', cursor: 'pointer' }}
+          onClick={handleOpenFormularIO}
         >
           <CardContent>
             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>

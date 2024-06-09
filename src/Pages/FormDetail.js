@@ -10,7 +10,7 @@ const ResponseView = () => (
             }} />
     <Button 
       variant="contained" 
-      color="primary" 
+      color="secondary" 
       sx={{
         backgroundColor: '#7e57c2',
         ':hover': {
@@ -43,21 +43,24 @@ const FormDetail = () => {
     <Box sx={{ padding: '16px' }}>
       <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
         <Button
-          variant={selectedView === 'form' ? 'contained' : 'outlined'}
+          color="secondary"
+          variant={selectedView === 'form' ? 'contained' : 'text'}
           onClick={() => setSelectedView('form')}
           sx={{ marginRight: '8px', backgroundColor: selectedView === 'form' ? '#7e57c2' : 'inherit' }}
         >
           Formulário
         </Button>
         <Button
-          variant={selectedView === 'response' ? 'contained' : 'outlined'}
+          color="secondary"
+          variant={selectedView === 'response' ? 'contained' : 'text'}
           onClick={() => setSelectedView('response')}
-          sx={{ marginRight: '8px', backgroundColor: selectedView === 'response' ? '#7e57c2' : 'inherit' }}
+          sx={{ marginRight: '8px', backgroundColor: selectedView === 'response' ? '#7e57c2' : 'inherit', color: ''}}
         >
           Resposta
         </Button>
         <Button
-          variant={selectedView === 'stats' ? 'contained' : 'outlined'}
+          color="secondary"
+          variant={selectedView === 'stats' ? 'contained' : 'text'}
           onClick={() => setSelectedView('stats')}
           sx={{ backgroundColor: selectedView === 'stats' ? '#7e57c2' : 'inherit' }}
         >

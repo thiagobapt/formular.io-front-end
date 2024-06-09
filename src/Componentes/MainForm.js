@@ -40,7 +40,7 @@ const MainForm = () => {
         placeholder="Formulário sem título"
         variant="outlined"
         margin="normal"
-        style={{ backgroundColor: '#e1bee7', borderRadius: '8px', width: '600px', margin: '0 auto', marginBottom: '32px' }}
+        style={{ backgroundColor: 'white', borderRadius: '8px', width: '600px', margin: '0 auto', marginBottom: '32px', }}
       />
       {forms.map((form, index) => (
         <Box key={form.id} sx={{ width: '100%', display: 'flex', justifyContent: 'center', marginBottom: index !== forms.length - 1 ? '32px' : '0' }}>
@@ -48,13 +48,13 @@ const MainForm = () => {
         </Box>
       ))}
       <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '16px' }}>
-        <Button variant="contained" onClick={handleAddForm} startIcon={<AddIcon />}>
+        <Button variant="contained" onClick={handleAddForm} startIcon={<AddIcon />} color="secondary">
           Adicionar Formulário
         </Button>
       </Box>
       <Button
         variant="contained"
-        color="primary"
+        color="secondary"
         sx={{
           position: 'fixed',
           bottom: '16px',

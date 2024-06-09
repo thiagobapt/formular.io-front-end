@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { TextField, Button, Box, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Link } from 'react-router-dom';
 
 const theme = createTheme();
 
@@ -10,7 +11,7 @@ const GradientBackground = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  background: 'linear-gradient(to bottom, #D3CCE3, #E9E4F0)',
+  background: '#825DEA',
   padding: theme.spacing(2),
 }));
 
@@ -50,7 +51,7 @@ const LoginScreen = () => {
     <ThemeProvider theme={theme}>
       <GradientBackground>
         <LoginBox>
-          <Typography variant="h5" gutterBottom>
+          <Typography variant="h4" fontFamily={'sans-serif'} gutterBottom>
             Formular.io
           </Typography>
           <TextField
@@ -71,17 +72,17 @@ const LoginScreen = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <Box mt={2}>
-            <Button variant="contained" color="primary" fullWidth onClick={handleValidate}>
-              Validar
+            <Button variant="contained" color="secondary" fullWidth fontFamily={'sans-serif'} component={Link} to="/create">
+              Entrar
             </Button>
           </Box>
           <Box mt={2}>
-            <Button variant="text" color="secondary" fullWidth onClick={handleSignUp}>
+            <Button variant="text" color="secondary" fullWidth fontFamily={'sans-serif'} component={Link} to="/register">
               Cadastro
             </Button>
           </Box>
           <Box mt={2}>
-            <Button variant="text" color="secondary" fullWidth onClick={handleForgotPassword}>
+            <Button variant="text" color="secondary" fullWidth fontFamily={'sans-serif'} component={Link} to="/forgot-password">
               Esqueci a Senha
             </Button>
           </Box>

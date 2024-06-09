@@ -38,7 +38,7 @@ const Form = ({ id, removeForm }) => {
           <RadioGroup>
             {options.map((option, index) => (
               <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
-                <FormControlLabel value={option} control={<Radio />} label="" />
+                <FormControlLabel value={option} control={<Radio color='secondary'/>} label="" />
                 <TextField placeholder={`Opção ${index + 1}`} value={option} onChange={(e) => handleOptionChange(index, e.target.value)} variant="outlined" style={{ flexGrow: 1, marginRight: '8px' }} />
                 <IconButton onClick={() => handleRemoveOption(index)}>
                   <Clear/>
@@ -58,7 +58,7 @@ const Form = ({ id, removeForm }) => {
         }}/>
       )}
       <div style={{ display: 'flex', alignItems: 'center', marginTop: '16px' }}>
-        <FormControlLabel control={<Switch />} label="Obrigatório" />
+        <FormControlLabel control={<Switch  color='secondary'/>} label="Obrigatório" />
         <IconButton onClick={() => removeForm(id)} color="secondary" aria-label="delete">
           <DeleteIcon />
         </IconButton>

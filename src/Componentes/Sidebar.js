@@ -2,11 +2,10 @@
 import React, { useState } from 'react';
 import { Drawer, List, ListItem, ListItemIcon, ListItemText, Button, Box, Typography, Divider, IconButton } from '@mui/material';
 import { AddBox, ListAlt, AssignmentTurnedIn, AccountCircle, ExitToApp, Menu as MenuIcon, ChevronLeft as ChevronLeftIcon } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
   const [open, setOpen] = useState(true);
-  const navigate = useNavigate();
 
   const handleDrawerToggle = () => {
     setOpen(!open);
@@ -23,49 +22,49 @@ const Sidebar = () => {
         '& .MuiDrawer-paper': {
           width: open ? 240 : 60,
           boxSizing: 'border-box',
-          backgroundColor: 'lavender',
+          backgroundColor: '#825DEA',
           transition: 'width 0.3s',
           overflowX: 'hidden',
-          borderRadius: '0 10px 10px 0'
+          borderRadius: '0 10px 10px 0' // Borda arredondada no lado direito
         },
       }}
     >
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', p: 2 }}>
         {open && (
-          <Typography variant="h6" noWrap sx={{ flexGrow: 1, textAlign: 'center' }}>
+          <Typography variant="h6" noWrap sx={{ flexGrow: 1, textAlign: 'center', color: 'white' , fontFamily:'sans-serif',fontSize:'30px'}}>
             Formulário
           </Typography>
         )}
         <IconButton onClick={handleDrawerToggle}>
-          {open ? <ChevronLeftIcon /> : <MenuIcon />}
+          {open ? <ChevronLeftIcon style={{color:'white'}} /> : <MenuIcon  style={{color:'white'}}/>}
         </IconButton>
       </Box>
       <Divider />
       <List>
-        <ListItem button onClick={() => navigate('/create')}>
+        <ListItem button component={Link} to="/create">
           <ListItemIcon>
-            <AddBox />
+            <AddBox  style={{color:'white'}}/>
           </ListItemIcon>
-          {open && <ListItemText primary="Criar Formulário" />}
+          {open && <ListItemText primary="Criar Formulário"  style={{color:'white'}}/>}
         </ListItem>
-        <ListItem button onClick={() => navigate('/my-forms')}>
+        <ListItem button component={Link} to="/my-forms">
           <ListItemIcon>
-            <ListAlt />
+            <ListAlt style={{color:'white'}} />
           </ListItemIcon>
-          {open && <ListItemText primary="Meus Formulários" />}
+          {open && <ListItemText primary="Meus Formulários" style={{color:'white'}}/>}
         </ListItem>
-        <ListItem button onClick={() => navigate('/answered-forms')}>
+        <ListItem button component={Link} to="/answered-forms">
           <ListItemIcon>
-            <AssignmentTurnedIn />
+            <AssignmentTurnedIn style={{color:'white'}} />
           </ListItemIcon>
-          {open && <ListItemText primary="Formulários Respondidos" />}
+          {open && <ListItemText primary="Formulários Respondidos" style={{color:'white'}} />}
         </ListItem>
       </List>
       <Box sx={{ position: 'absolute', bottom: 0, width: '100%' }}>
-        <Button startIcon={<AccountCircle />} fullWidth>
+        <Button startIcon={<AccountCircle />} fullWidth style={{color:'white'}} component={Link} to="/profile">
           {open && "Perfil"}
         </Button>
-        <Button startIcon={<ExitToApp />} fullWidth onClick={() => console.log('Redirecionando...')}>
+        <Button startIcon={<ExitToApp />} fullWidth style={{color:'white'}} component={Link} to="/Login">
           {open && "Sair"}
         </Button>
       </Box>
