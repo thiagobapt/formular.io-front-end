@@ -1,4 +1,4 @@
-// src/components/Sidebar.js
+
 import React, { useState } from 'react';
 import { Drawer, List, ListItem, ListItemIcon, ListItemText, Button, Box, Typography, Divider, IconButton } from '@mui/material';
 import { AddBox, ListAlt, AssignmentTurnedIn, AccountCircle, ExitToApp, Menu as MenuIcon, ChevronLeft as ChevronLeftIcon } from '@mui/icons-material';
@@ -25,7 +25,7 @@ const Sidebar = () => {
           backgroundColor: '#825DEA',
           transition: 'width 0.3s',
           overflowX: 'hidden',
-          borderRadius: '0 10px 10px 0' // Borda arredondada no lado direito
+          borderRadius: '0 10px 10px 0'
         },
       }}
     >

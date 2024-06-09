@@ -1,4 +1,4 @@
-// src/components/Register.js
+
 import React, { useState } from 'react';
 import { Box, Typography, TextField, Button, Paper, Snackbar, Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -74,7 +74,22 @@ const Register = () => {
               type={field === 'birthDate' ? 'date' : field === 'password' ? 'password' : field === 'email' ? 'email' :'text'}
               value={profile[field]}
               onChange={(e) => handleChange(field, e.target.value)}
-              sx={{ flex: 2, marginRight: '8px' }}
+              sx={{ flex: 2, marginRight: '8px', input: { color: 'white' },
+              '& .MuiInputBase-input::placeholder': {
+                color: 'white',
+              },
+              '& .MuiInputBase-root': {
+                color: 'white',
+              },
+              '& .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'white',
+              },
+              '&:hover .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'white',
+              },
+              '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                borderColor: 'white',
+              }, }}
               fullWidth
             />
           </Box>

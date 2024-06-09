@@ -45,7 +45,23 @@ const CodeForgotPassword = () => {
         <TextField
           fullWidth
           placeholder="Código"
-          sx={{ margin: '16px 0' }}
+          sx={{ margin: '16px 0', 
+          input: { color: 'white' },
+          '& .MuiInputBase-input::placeholder': {
+            color: 'white',
+          },
+          '& .MuiInputBase-root': {
+            color: 'white',
+          },
+          '& .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'white',
+          },
+          '&:hover .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'white',
+          },
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'white',
+          }, }}
         />
         <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
           <Button

@@ -1,6 +1,6 @@
-// src/components/MainForm.js
+
 import React, { useState } from 'react';
-import { TextField, Button, Box, Modal, Typography, Switch, FormControlLabel, IconButton } from '@mui/material';
+import { TextField, Button, Box, Modal, Typography, Switch, FormControlLabel } from '@mui/material';
 import { Add as AddIcon, ContentCopy as ContentCopyIcon } from '@mui/icons-material';
 import Form from './Form';
 

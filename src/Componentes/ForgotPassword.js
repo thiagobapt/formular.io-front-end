@@ -1,4 +1,4 @@
-// src/components/ForgotPassword.js
+
 import React from 'react';
 import { Box, Typography, TextField, Button, Paper } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -12,11 +12,6 @@ const ForgotPassword = () => {
 
   const handleFromToCodeForgotPassword = () => {
     navigate('/code-forgot-password');
-  };
-
-  const handleConfirm = () => {
-    // Adicione aqui a lógica para confirmar a redefinição de senha
-    console.log('Redefinição de senha solicitada');
   };
 
   return (
@@ -50,7 +45,22 @@ const ForgotPassword = () => {
         <TextField
           fullWidth
           placeholder="Login"
-          sx={{ margin: '16px 0'}}
+          sx={{ margin: '16px 0', input: { color: 'white' },
+          '& .MuiInputBase-input::placeholder': {
+            color: 'white',
+          },
+          '& .MuiInputBase-root': {
+            color: 'white',
+          },
+          '& .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'white',
+          },
+          '&:hover .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'white',
+          },
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'white',
+          },}}
         />
         <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
           <Button

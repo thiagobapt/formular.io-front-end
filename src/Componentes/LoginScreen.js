@@ -31,22 +31,6 @@ const LoginBox = styled(Box)(({ theme }) => ({
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const handleValidate = () => {
-    // Adicione sua lógica de validação aqui
-    alert(`Email: ${email}\nSenha: ${password}`);
-  };
-
-  const handleSignUp = () => {
-    // Redirecione para a tela de cadastro
-    alert('Redirecionando para a tela de cadastro...');
-  };
-
-  const handleForgotPassword = () => {
-    // Redirecione para a tela de recuperação de senha
-    alert('Redirecionando para a tela de recuperação de senha...');
-  };
-
   return (
     <ThemeProvider theme={theme}>
       <GradientBackground>

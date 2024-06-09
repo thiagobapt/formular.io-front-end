@@ -1,13 +1,12 @@
-// src/components/Profile.js
 import React, { useState } from 'react';
-import { Box, Typography, TextField, IconButton, Paper, Button, Snackbar, Alert } from '@mui/material';
+import { Box, Typography, TextField, IconButton, Paper, Snackbar, Alert } from '@mui/material';
 import { Edit as EditIcon, Save as SaveIcon } from '@mui/icons-material';
 
 const Profile = () => {
   const [profile, setProfile] = useState({
-    name: 'Teste',
+    name: 'John Doe',
     birthDate: '1990-01-01',
-    email: 'Teste@exemplo.com',
+    email: 'john.doe@example.com',
     password: '********',
   });
 
@@ -42,7 +41,7 @@ const Profile = () => {
         alignItems: 'center',
         justifyContent: 'center',
         height: '100vh',
-        backgroundColor: 'white',
+        backgroundColor: '#f3e5f5',
       }}
     >
       <Paper
@@ -70,23 +69,43 @@ const Profile = () => {
               {field === 'email' && 'Email'}
               {field === 'password' && 'Senha'}
             </Typography>
-            <TextField 
+            <TextField
               type={field === 'birthDate' ? 'date' : field === 'password' ? 'password' : 'text'}
               value={profile[field]}
               onChange={(e) => handleChange(field, e.target.value)}
               disabled={editingField !== field}
-              sx={{ flex: 2, marginRight: '8px', }}
+              placeholder={`Digite seu ${field}`}
               fullWidth
+              sx={{
+                flex: 2,
+                marginRight: '8px',
+                input: { color: 'white' },
+                '& .MuiInputBase-input::placeholder': {
+                  color: 'white',
+                },
+                '& .MuiInputBase-root': {
+                  color: 'white',
+                },
+                '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: 'white',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
+                  borderColor: 'white',
+                },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                  borderColor: 'white',
+                },
+              }}
             />
             <IconButton onClick={() => editingField === field ? handleSave(field) : handleEdit(field)}>
-              {editingField === field ? <SaveIcon style={{color:'white'}} /> : <EditIcon style={{color:'white'}}/>}
+              {editingField === field ? <SaveIcon style={{color:'white'}} /> : <EditIcon  style={{color:'white'}}/>}
             </IconButton>
           </Box>
         ))}
       </Paper>
       <Snackbar
         open={snackbarOpen}
-        autoHideDuration={1000}
+        autoHideDuration={2000}
         onClose={handleCloseSnackbar}
       >
         <Alert onClose={handleCloseSnackbar} severity="success">
