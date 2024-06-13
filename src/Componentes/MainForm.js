@@ -30,8 +30,7 @@ const MainForm = () => {
   };
 
   const handleCopyLink = () => {
-    navigator.clipboard.writeText('http://example.com/form-link');
-    alert('Link copiado para a área de transferência!');
+    navigator.clipboard.writeText('');
   };
 
   return (
@@ -99,7 +98,7 @@ const MainForm = () => {
             }}
           />
           <FormControlLabel
-            control={<Switch checked={anonymousResponses} onChange={handleToggleAnonymousResponses} />}
+            control={<Switch checked={anonymousResponses} onChange={handleToggleAnonymousResponses} color="secondary" />}
             label="Permitir respostas anônimas?"
           />
           <Button

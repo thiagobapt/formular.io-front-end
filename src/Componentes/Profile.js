@@ -41,7 +41,6 @@ const Profile = () => {
         alignItems: 'center',
         justifyContent: 'center',
         height: '100vh',
-        backgroundColor: '#f3e5f5',
       }}
     >
       <Paper
