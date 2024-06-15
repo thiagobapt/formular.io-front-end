@@ -32,7 +32,7 @@ const Sidebar = () => {
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', p: 2 }}>
         {open && (
           <Typography variant="h6" noWrap sx={{ flexGrow: 1, textAlign: 'center', color: 'white' , fontFamily:'sans-serif',fontSize:'30px'}}>
-            Formulário
+            Formulár.io
           </Typography>
         )}
         <IconButton onClick={handleDrawerToggle}>

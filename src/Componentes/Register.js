@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { Box, Typography, TextField, Button, Paper, Snackbar, Alert } from '@mui/material';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
@@ -10,6 +11,24 @@ const Register = () => {
     email: '',
     password: '',
   });
+
+  const RegisterAPI = async () =>{
+    try{
+      const response = await axios.post("http://localhost:3000/user",{
+        user_email: profile.email,
+        user_name :profile.name,
+        user_password: profile.password,
+        user_birthday: profile.birthDate
+      });
+      console.log("Login realizado com sucesso:", response.data);
+
+      setSnackbarOpen(true);
+    }
+
+    catch (error) {
+      console.error("Erro durante o login:", error.response.data.message);
+    }
+  }
 
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const navigate = useNavigate();
@@ -97,7 +116,7 @@ const Register = () => {
         <Button
           variant="contained"
           color="secondary"
-          onClick={handleRegister}
+          onClick={RegisterAPI}
           sx={{
             backgroundColor: 'purple',
             '&:hover': {

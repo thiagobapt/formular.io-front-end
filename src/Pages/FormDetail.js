@@ -58,14 +58,6 @@ const FormDetail = () => {
         >
           Resposta
         </Button>
-        <Button
-          color="secondary"
-          variant={selectedView === 'stats' ? 'contained' : 'text'}
-          onClick={() => setSelectedView('stats')}
-          sx={{ backgroundColor: selectedView === 'stats' ? '#7e57c2' : 'inherit' }}
-        >
-          Estatística
-        </Button>
       </Box>
       {renderSelectedView()}
     </Box>
