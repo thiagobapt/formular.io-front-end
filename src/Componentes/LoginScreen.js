@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { TextField, Button, Box, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const theme = createTheme();
 
@@ -31,6 +32,24 @@ const LoginBox = styled(Box)(({ theme }) => ({
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigate = useNavigate();
+
+  const LoginUser = async () =>{
+
+    try{
+      const response = await axios.post("http://localhost:3000/auth/login",{
+        user_email: email,
+        user_password: password,
+      })
+      console.log("Login realizado com sucesso:", response.data);
+      navigate('/create');
+    }
+    catch (error) {
+      console.error("Erro durante o login:", error.response.data.message);
+    }
+    
+  }
   return (
     <ThemeProvider theme={theme}>
       <GradientBackground>
@@ -56,7 +75,7 @@ const LoginScreen = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <Box mt={2}>
-            <Button variant="contained" color="secondary" fullWidth fontFamily={'sans-serif'} component={Link} to="/create">
+            <Button variant="contained" color="secondary" fullWidth fontFamily={'sans-serif'}  onClick={LoginUser}>
               Entrar
             </Button>
           </Box>
