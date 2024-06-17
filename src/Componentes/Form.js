@@ -9,7 +9,7 @@ const Form = ({ id, removeForm, updateFormData }) => {
 
   useEffect(() => {
     updateFormData(id, { questionType, options, questionTitle });
-  }, [questionType, options, questionTitle]);
+  }, [id, questionType, options, questionTitle, updateFormData]);
 
   const handleAddOption = () => {
     setOptions([...options, '']);

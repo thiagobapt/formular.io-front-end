@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import { TextField, Button, Box, Modal, Typography } from '@mui/material';
 import { Add as AddIcon, ContentCopy as ContentCopyIcon } from '@mui/icons-material';
 import Form from './Form';
-import axios from 'axios';
 import { CreateFormApi } from '../integracoes/CreateFormAPI';
 import { CreatequestionsAPI } from '../integracoes/CreatequestionsAPI';
-
 
 const MainForm = () => {
   const [forms, setForms] = useState([{ id: 1 }]);
@@ -34,24 +32,14 @@ const MainForm = () => {
       const user_id = localStorage.getItem("user_id");
 
       if (user_id) {
-        await CreateFormApi(user_id,TitleForms);
-        for(const id in formData){
+        await CreateFormApi(user_id, TitleForms);
+        for (const id in formData) {
           const { questionType, options, questionTitle } = formData[id];
-          await CreatequestionsAPI(localStorage.getItem("form_id"),questionType,questionTitle,options);
+          await CreatequestionsAPI(localStorage.getItem("form_id"), questionType, questionTitle, options);
         }
-        /*
-        const payload = {
-          TitleForms,
-          forms: Object.keys(formData).map(id => ({
-            form_id: id,
-            ...formData[id]
-          }))
-        }
-        */
         setOpenModal(true);
       }
-    }
-     catch (error) {
+    } catch (error) {
       console.error("Erro durante o login:", error.response.data.message);
     }
   };
@@ -72,7 +60,7 @@ const MainForm = () => {
         margin="normal"
         value={TitleForms}
         onChange={(e) => setTitleForms(e.target.value)}
-        style={{ backgroundColor: 'white', borderRadius: '8px', width: '600px', margin: '0 auto', marginBottom: '32px', }}
+        style={{ backgroundColor: 'white', borderRadius: '8px', width: '600px', margin: '0 auto', marginBottom: '32px' }}
       />
       {forms.map((form, index) => (
         <Box key={form.id} sx={{ width: '100%', display: 'flex', justifyContent: 'center', marginBottom: index !== forms.length - 1 ? '32px' : '0' }}>
@@ -110,7 +98,7 @@ const MainForm = () => {
             left: '50%',
             transform: 'translate(-50%, -50%)',
             width: '700px',
-            height: '150px', // Aumentando o tamanho do modal
+            height: '150px',
             bgcolor: 'background.paper',
             boxShadow: 24,
             p: 4,
@@ -126,7 +114,7 @@ const MainForm = () => {
             variant="outlined"
             fullWidth
             margin="normal"
-            value= {"http://localhost:3001/respond-form/" + localStorage.getItem("form_id")}
+            value={"http://localhost:3001/respond-form/" + localStorage.getItem("form_id")}
             InputProps={{
               readOnly: true,
             }}
@@ -139,7 +127,7 @@ const MainForm = () => {
               position: 'absolute',
               bottom: '10px',
               right: '16px',
-              fontSize: '12px', // Diminuindo o tamanho do botão
+              fontSize: '12px',
               padding: '8px 12px',
               ':hover': {
                 backgroundColor: '#5e35b1',

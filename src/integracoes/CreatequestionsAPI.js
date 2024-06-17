@@ -3,7 +3,7 @@ import axios from "axios";
 export const CreatequestionsAPI = async (form_id, questionType,title,options) => {
     try {
        if(questionType === 'multipleChoice') {
-        const response = await axios.post("http://localhost:3000/question/mutiple-choice",{
+        const response = await axios.post("http://localhost:3000/question/multiple-choice",{
             formId: form_id,
             question_body: {
                 title: title,
