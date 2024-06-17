@@ -1,9 +1,9 @@
 import axios from "axios";
 
-export const UpdatequestionsAPI = async (form_id, questionType,title,options) => {
+export const UpdatequestionsAPI = async (question_id, questionType,title,options) => {
     try {
        if(questionType === 'multipleChoice') {
-        const response = await axios.patch(`http://localhost:3000/question/multiple-choice/${form_id}`,{
+        const response = await axios.patch(`http://localhost:3000/question/multiple-choice/${question_id}`,{
             question_body: {
                 title: title,
                 choices: options
@@ -15,7 +15,7 @@ export const UpdatequestionsAPI = async (form_id, questionType,title,options) =>
        }
 
        if (questionType === 'essay') {
-        const response = await axios.patch(`http://localhost:3000/question/multi-line-dissertative/${form_id}`,{
+        const response = await axios.patch(`http://localhost:3000/question/multi-line-dissertative/${question_id}`,{
             question_body: {
             title: title
              }

@@ -14,7 +14,11 @@ export const CreatequestionsAPI = async (form_id, questionType,title,options) =>
 
         })
 
-        console.log('Pergunta Criada !', response.data)
+        console.log('Pergunta Criada !', response.data);
+        
+        localStorage.setItem("question_id_choice", response.data.question_id);
+        console.log("Question_id",localStorage.getItem("question_id_choice"));
+
        }
 
        if (questionType === 'essay') {
@@ -25,6 +29,9 @@ export const CreatequestionsAPI = async (form_id, questionType,title,options) =>
              }
         })
         console.log('Pergunta Criada !', response.data)
+
+        localStorage.setItem("question_id", response.data.question_id);
+        console.log("Question_id",localStorage.getItem("question_id"));
 
        }
     }

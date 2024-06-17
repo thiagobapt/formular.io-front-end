@@ -78,7 +78,7 @@ const Myformcreated = () => {
         await UpdateFormApi(user_id, TitleForms);
         for(const id in formData){
           const { questionType, options, questionTitle } = formData[id];
-          await UpdatequestionsAPI(localStorage.getItem("form_id"), questionType, questionTitle, options);
+          await UpdatequestionsAPI(localStorage.getItem("question_id"), questionType, questionTitle, options);
         }
         setOpenModal(true);
       }
