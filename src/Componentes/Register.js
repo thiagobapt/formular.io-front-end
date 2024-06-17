@@ -95,7 +95,7 @@ const Register = () => {
               {field === 'password' && 'Senha'}
             </Typography>
             <TextField
-              type={field === 'birthDate' ? '' : field === 'password' ? 'password' : field === 'email' ? 'email' :'text'}
+              type={field === 'birthDate' ? 'date' : field === 'password' ? 'password' : field === 'email' ? 'email' :'text'}
               value={profile[field]}
               onChange={(e) => handleChange(field, e.target.value)}
               sx={{ flex: 2, marginRight: '8px', input: { color: 'white' },
