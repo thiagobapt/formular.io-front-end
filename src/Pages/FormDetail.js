@@ -2,12 +2,21 @@
 import React, { useState } from 'react';
 import { Box, Button, TextField } from '@mui/material';
 import MainForm from '../Componentes/MainForm';
+import Myformcreated from '../Componentes/MyFormCreated';
+import axios from 'axios';
 
-const ResponseView = () => (
+
+const ResponseView = ({ userName }) => (
   <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '16px' }}>
-    <TextField label="Usuário:" variant="outlined" sx={{ marginRight: '8px', width:'500px' }} InputProps={{
-              readOnly: true,
-            }} />
+    <TextField 
+      label="Usuário:" 
+      variant="outlined" 
+      sx={{ marginRight: '8px', width: '500px' }} 
+      value={userName} 
+      InputProps={{
+        readOnly: true,
+      }} 
+    />
     <Button 
       variant="contained" 
       color="secondary" 
@@ -17,6 +26,7 @@ const ResponseView = () => (
           backgroundColor: '#5e35b1',
         },
       }}
+      onClick={() => {window.open('/formular-io', '_blank');}}
     >
       Ver Resposta
     </Button>
@@ -25,17 +35,39 @@ const ResponseView = () => (
 
 const FormDetail = () => {
   const [selectedView, setSelectedView] = useState('form');
+  const [userName, setUserName] = useState('');
+
+  const fetchUserName = async () => {
+    try {
+      const form_id = localStorage.getItem("form_id");
+      const response = await axios.get(`http://localhost:3000/answer/form/${form_id}`);
+      const answers = response.data;
+
+      if (answers.length > 0) {
+        setUserName(answers[0].user.user_name);  // Assuming we want to display the user_name of the first answer
+      } else {
+        setUserName('No answers found');
+      }
+    } catch (error) {
+      console.error("Erro ao buscar as respostas:", error);
+    }
+  };
+
+  const handleResponseClick = async () => {
+    await fetchUserName();
+    setSelectedView('response');
+  };
 
   const renderSelectedView = () => {
     switch (selectedView) {
       case 'form':
-        return <MainForm />;
+        return <Myformcreated />;
       case 'response':
-        return <ResponseView />;
+        return <ResponseView userName={userName} />;
       case 'stats':
         return <div>Estatística não implementada</div>; // Placeholder for stats
       default:
-        return <MainForm />;
+        return <Myformcreated />;
     }
   };
 
@@ -53,7 +85,7 @@ const FormDetail = () => {
         <Button
           color="secondary"
           variant={selectedView === 'response' ? 'contained' : 'text'}
-          onClick={() => setSelectedView('response')}
+          onClick={handleResponseClick}
           sx={{ marginRight: '8px', backgroundColor: selectedView === 'response' ? '#7e57c2' : 'inherit', color: ''}}
         >
           Resposta

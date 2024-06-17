@@ -14,12 +14,13 @@ import LoginScreen from './Componentes/LoginScreen'; // Certifique-se de ter est
 import ForgotPassword from './Componentes/ForgotPassword';
 import CodeForgotPassword from './Componentes/CodeForgotPassword';
 import NewPassword from './Componentes/NewPassword';
+import MyFormsCreated from './Componentes/MyFormCreated';
 
 function App() {
   return (
       <Routes>
         <Route path="/formular-io" element={<FormularIO />} />
-        <Route path="/respond-form" element={<RespondForm />} />
+        <Route path="/respond-form/:id" element={<RespondForm />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<LoginScreen />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -38,6 +39,7 @@ function App() {
                   <Route path="/answered-forms" element={<AnsweredForms />} />
                   <Route path="/" element={<MainForm />} />
                   <Route path="/profile" element={<Profile />} />
+                  <Route path="/myformcreated/:id" element={<FormDetail/>} />
                 </Routes>
               </main>
             </div>

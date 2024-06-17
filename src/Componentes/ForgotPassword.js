@@ -1,17 +1,41 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Typography, TextField, Button, Paper } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+const GetUser = async (user_id) => {
+  try {
+    const response = await axios.get(`http://localhost:3000/user/${user_id}`,{
+      user_id: user_id,
+    }
+    );
+    return response.data;
+  } catch (error) {
+    console.error('Erro: ', error);
+    throw error;
+  }
+};
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
 
   const handleBackToLogin = () => {
     navigate('/login');
   };
 
-  const handleFromToCodeForgotPassword = () => {
-    navigate('/code-forgot-password');
+  const handleFromToCodeForgotPassword = async () => {
+    try {
+      const response = await GetUser(localStorage.getItem("user_id"));
+      if (response.user_email === email) {
+        navigate('/new-password', { state: { email } });
+      } else {
+        setError('Email não encontrado');
+      }
+    } catch (error) {
+      setError('Erro ao verificar o email');
+    }
   };
 
   return (
@@ -45,23 +69,29 @@ const ForgotPassword = () => {
         <TextField
           fullWidth
           placeholder="Login"
-          sx={{ margin: '16px 0', input: { color: 'white' },
-          '& .MuiInputBase-input::placeholder': {
-            color: 'white',
-          },
-          '& .MuiInputBase-root': {
-            color: 'white',
-          },
-          '& .MuiOutlinedInput-notchedOutline': {
-            borderColor: 'white',
-          },
-          '&:hover .MuiOutlinedInput-notchedOutline': {
-            borderColor: 'white',
-          },
-          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-            borderColor: 'white',
-          },}}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          sx={{ 
+            margin: '16px 0',
+            input: { color: 'white' },
+            '& .MuiInputBase-input::placeholder': {
+              color: 'white',
+            },
+            '& .MuiInputBase-root': {
+              color: 'white',
+            },
+            '& .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'white',
+            },
+            '&:hover .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'white',
+            },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'white',
+            },
+          }}
         />
+        {error && <Typography color="error">{error}</Typography>}
         <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
           <Button
             variant="contained"

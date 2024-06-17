@@ -20,13 +20,22 @@ const Register = () => {
         user_password: profile.password,
         user_birthday: profile.birthDate
       });
-      console.log("Login realizado com sucesso:", response.data);
+      console.log("Cadastro realizado com sucesso:", response.data);
+
+      const user_id = response.data?.user_id;
+      if (user_id) {
+        localStorage.setItem("user_id", response.data.user_id);
+        console.log("User_id armazenado:", localStorage.getItem("user_id"));
+      } else {
+
+        throw new Error("User_id não encontrado na resposta");
+      }
 
       setSnackbarOpen(true);
     }
 
     catch (error) {
-      console.error("Erro durante o login:", error.response.data.message);
+      console.error("Erro durante o login:", error.response.data);
     }
   }
 
@@ -38,10 +47,6 @@ const Register = () => {
       ...prevProfile,
       [field]: value,
     }));
-  };
-
-  const handleRegister = () => {
-    setSnackbarOpen(true);
   };
 
   const handleCloseSnackbar = () => {
@@ -90,7 +95,7 @@ const Register = () => {
               {field === 'password' && 'Senha'}
             </Typography>
             <TextField
-              type={field === 'birthDate' ? 'date' : field === 'password' ? 'password' : field === 'email' ? 'email' :'text'}
+              type={field === 'birthDate' ? '' : field === 'password' ? 'password' : field === 'email' ? 'email' :'text'}
               value={profile[field]}
               onChange={(e) => handleChange(field, e.target.value)}
               sx={{ flex: 2, marginRight: '8px', input: { color: 'white' },

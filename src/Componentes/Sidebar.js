@@ -31,8 +31,8 @@ const Sidebar = () => {
     >
       <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', p: 2 }}>
         {open && (
-          <Typography variant="h6" noWrap sx={{ flexGrow: 1, textAlign: 'center', color: 'white' , fontFamily:'sans-serif',fontSize:'30px'}}>
-            Formulár.io
+          <Typography variant="h6" noWrap  fontWeight={'bold'} sx={{ flexGrow: 1, textAlign: 'center', color: 'white' , fontFamily:'sans-serif',fontSize:'30px'}}>
+            Formular.io
           </Typography>
         )}
         <IconButton onClick={handleDrawerToggle}>
@@ -45,7 +45,7 @@ const Sidebar = () => {
           <ListItemIcon>
             <AddBox  style={{color:'white'}}/>
           </ListItemIcon>
-          {open && <ListItemText primary="Criar Formulário"  style={{color:'white'}}/>}
+          {open && <ListItemText primary="Criar Formulário"   style={{color:'white'}}/>}
         </ListItem>
         <ListItem button component={Link} to="/my-forms">
           <ListItemIcon>

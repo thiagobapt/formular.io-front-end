@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextField, Button, Box, Typography } from '@mui/material';
+import { TextField, Button, Box, Typography, Alert } from '@mui/material';
 import { styled } from '@mui/system';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link, useNavigate } from 'react-router-dom';
@@ -44,9 +44,20 @@ const LoginScreen = () => {
       })
       console.log("Login realizado com sucesso:", response.data);
       navigate('/create');
+
+      const token = response.data?.access_token;
+      if (token) {
+        // Armazena o token no localStorage
+        localStorage.setItem("token", response.data.access_token);
+        // Envia uma mensagem para o console com o valor do token armazenado
+        console.log("Token armazenado:", localStorage.getItem("token"));
+      } else {
+        // Lança um erro se o token não estiver presente na resposta
+        throw new Error("Token não encontrado na resposta");
+      }
     }
     catch (error) {
-      console.error("Erro durante o login:", error.response.data.message);
+      console.log("Erro durante o login:", error.response.data.message);
     }
     
   }
@@ -54,7 +65,7 @@ const LoginScreen = () => {
     <ThemeProvider theme={theme}>
       <GradientBackground>
         <LoginBox>
-          <Typography variant="h4" fontFamily={'sans-serif'} gutterBottom>
+          <Typography variant="h4" fontFamily={'sans-serif'} fontWeight={'bold'} color={'secondary'}  gutterBottom>
             Formular.io
           </Typography>
           <TextField

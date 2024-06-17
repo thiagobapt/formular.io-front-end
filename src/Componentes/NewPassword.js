@@ -1,14 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Typography, TextField, Button, Paper } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
 
 const NewPassword = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { email } = location.state || {};
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleBackToLogin = () => {
     navigate('/login');
   };
 
+  const handleResetPassword = async () => {
+    if (password !== confirmPassword) {
+      setError('As senhas não coincidem');
+      return;
+    }
+
+    try {
+      await axios.patch(`http://localhost:3000/user/${email}/resetPassword/${password}`);
+      navigate('/login');
+    } catch (error) {
+      setError('Erro ao redefinir a senha');
+    }
+  };
 
   return (
     <Box
@@ -42,46 +61,55 @@ const NewPassword = () => {
           fullWidth
           placeholder="Nova Senha"
           type='password'
-          sx={{ margin: '16px 0', 
-          input: { color: 'white' },
-          '& .MuiInputBase-input::placeholder': {
-            color: 'white',
-          },
-          '& .MuiInputBase-root': {
-            color: 'white',
-          },
-          '& .MuiOutlinedInput-notchedOutline': {
-            borderColor: 'white',
-          },
-          '&:hover .MuiOutlinedInput-notchedOutline': {
-            borderColor: 'white',
-          },
-          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-            borderColor: 'white',
-          }, }}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          sx={{ 
+            margin: '16px 0',
+            input: { color: 'white' },
+            '& .MuiInputBase-input::placeholder': {
+              color: 'white',
+            },
+            '& .MuiInputBase-root': {
+              color: 'white',
+            },
+            '& .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'white',
+            },
+            '&:hover .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'white',
+            },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'white',
+            },
+          }}
         />
         <TextField
           fullWidth
           placeholder="Confirmar Senha"
           type='password'
-          sx={{ margin: '16px 0', 
-          input: { color: 'white' },
-          '& .MuiInputBase-input::placeholder': {
-            color: 'white',
-          },
-          '& .MuiInputBase-root': {
-            color: 'white',
-          },
-          '& .MuiOutlinedInput-notchedOutline': {
-            borderColor: 'white',
-          },
-          '&:hover .MuiOutlinedInput-notchedOutline': {
-            borderColor: 'white',
-          },
-          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-            borderColor: 'white',
-          }, }}
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          sx={{ 
+            margin: '16px 0',
+            input: { color: 'white' },
+            '& .MuiInputBase-input::placeholder': {
+              color: 'white',
+            },
+            '& .MuiInputBase-root': {
+              color: 'white',
+            },
+            '& .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'white',
+            },
+            '&:hover .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'white',
+            },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor: 'white',
+            },
+          }}
         />
+        {error && <Typography color="error">{error}</Typography>}
         <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
           <Button
             variant="contained"
@@ -99,7 +127,7 @@ const NewPassword = () => {
           <Button
             variant="contained"
             color="secondary"
-            onClick={handleBackToLogin}
+            onClick={handleResetPassword}
             sx={{
               backgroundColor: 'purple',
               '&:hover': {

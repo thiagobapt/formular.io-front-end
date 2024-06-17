@@ -1,36 +1,67 @@
-
 import React, { useState } from 'react';
-import { TextField, Button, Box, Modal, Typography, Switch, FormControlLabel } from '@mui/material';
+import { TextField, Button, Box, Modal, Typography } from '@mui/material';
 import { Add as AddIcon, ContentCopy as ContentCopyIcon } from '@mui/icons-material';
 import Form from './Form';
+import axios from 'axios';
+import { CreateFormApi } from '../integracoes/CreateFormAPI';
+import { CreatequestionsAPI } from '../integracoes/CreatequestionsAPI';
+
 
 const MainForm = () => {
   const [forms, setForms] = useState([{ id: 1 }]);
+  const [formData, setFormData] = useState({});
   const [openModal, setOpenModal] = useState(false);
-  const [anonymousResponses, setAnonymousResponses] = useState(false);
+  const [TitleForms, setTitleForms] = useState('');
 
   const handleAddForm = () => {
-    setForms([...forms, { id: forms.length + 1 }]);
+    const newId = forms.length + 1;
+    setForms([...forms, { id: newId }]);
   };
 
   const handleRemoveForm = (id) => {
     setForms(forms.filter(form => form.id !== id));
+    const newFormData = { ...formData };
+    delete newFormData[id];
+    setFormData(newFormData);
   };
 
-  const handleOpenModal = () => {
-    setOpenModal(true);
+  const updateFormData = (id, data) => {
+    setFormData(prevData => ({ ...prevData, [id]: data }));
+  };
+
+  const handleOpenModal = async () => {
+    try {
+      const user_id = localStorage.getItem("user_id");
+
+      if (user_id) {
+        await CreateFormApi(user_id,TitleForms);
+        for(const id in formData){
+          const { questionType, options, questionTitle } = formData[id];
+          await CreatequestionsAPI(localStorage.getItem("form_id"),questionType,questionTitle,options);
+        }
+        /*
+        const payload = {
+          TitleForms,
+          forms: Object.keys(formData).map(id => ({
+            form_id: id,
+            ...formData[id]
+          }))
+        }
+        */
+        setOpenModal(true);
+      }
+    }
+     catch (error) {
+      console.error("Erro durante o login:", error.response.data.message);
+    }
   };
 
   const handleCloseModal = () => {
     setOpenModal(false);
   };
 
-  const handleToggleAnonymousResponses = () => {
-    setAnonymousResponses(!anonymousResponses);
-  };
-
   const handleCopyLink = () => {
-    navigator.clipboard.writeText('');
+    navigator.clipboard.writeText("http://localhost:3001/respond-form/" + localStorage.getItem("form_id"));
   };
 
   return (
@@ -39,11 +70,13 @@ const MainForm = () => {
         placeholder="Formulário sem título"
         variant="outlined"
         margin="normal"
+        value={TitleForms}
+        onChange={(e) => setTitleForms(e.target.value)}
         style={{ backgroundColor: 'white', borderRadius: '8px', width: '600px', margin: '0 auto', marginBottom: '32px', }}
       />
       {forms.map((form, index) => (
         <Box key={form.id} sx={{ width: '100%', display: 'flex', justifyContent: 'center', marginBottom: index !== forms.length - 1 ? '32px' : '0' }}>
-          <Form id={form.id} removeForm={handleRemoveForm} />
+          <Form id={form.id} removeForm={handleRemoveForm} updateFormData={updateFormData} />
         </Box>
       ))}
       <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '16px' }}>
@@ -67,7 +100,7 @@ const MainForm = () => {
         }}
         onClick={handleOpenModal}
       >
-        Enviar
+        Salvar
       </Button>
       <Modal open={openModal} onClose={handleCloseModal}>
         <Box
@@ -76,7 +109,8 @@ const MainForm = () => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: '600px', // Aumentando o tamanho do modal
+            width: '700px',
+            height: '150px', // Aumentando o tamanho do modal
             bgcolor: 'background.paper',
             boxShadow: 24,
             p: 4,
@@ -92,14 +126,10 @@ const MainForm = () => {
             variant="outlined"
             fullWidth
             margin="normal"
-            value="http://example.com/form-link"
+            value= {"http://localhost:3001/respond-form/" + localStorage.getItem("form_id")}
             InputProps={{
               readOnly: true,
             }}
-          />
-          <FormControlLabel
-            control={<Switch checked={anonymousResponses} onChange={handleToggleAnonymousResponses} color="secondary" />}
-            label="Permitir respostas anônimas?"
           />
           <Button
             variant="contained"
@@ -107,10 +137,10 @@ const MainForm = () => {
             sx={{
               backgroundColor: '#7e57c2',
               position: 'absolute',
-              bottom: '16px',
+              bottom: '10px',
               right: '16px',
               fontSize: '12px', // Diminuindo o tamanho do botão
-              padding: '8px 16px',
+              padding: '8px 12px',
               ':hover': {
                 backgroundColor: '#5e35b1',
               },

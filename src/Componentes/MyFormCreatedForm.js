@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, IconButton, Select, MenuItem, FormControl, InputLabel, RadioGroup, FormControlLabel, Radio, Box } from '@mui/material';
+import { TextField, IconButton, Select, MenuItem, FormControl, InputLabel, RadioGroup, FormControlLabel, Radio, Button, Box } from '@mui/material';
 import { Add as AddIcon, Clear, Delete as DeleteIcon } from '@mui/icons-material';
 
-const Form = ({ id, removeForm, updateFormData }) => {
-  const [questionType, setQuestionType] = useState('multipleChoice');
-  const [options, setOptions] = useState(['']);
-  const [questionTitle, setQuestionTitle] = useState('');
+const Myformcreatedform = ({ id, removeForm, updateFormData, questionType: initialQuestionType, options: initialOptions, questionTitle: initialQuestionTitle }) => {
+  const [questionType, setQuestionType] = useState(initialQuestionType || 'multipleChoice');
+  const [options, setOptions] = useState(initialOptions || ['']);
+  const [questionTitle, setQuestionTitle] = useState(initialQuestionTitle || '');
 
   useEffect(() => {
     updateFormData(id, { questionType, options, questionTitle });
@@ -29,14 +29,7 @@ const Form = ({ id, removeForm, updateFormData }) => {
 
   return (
     <Box sx={{ border: '1px solid #ccc', padding: '16px', marginBottom: '16px', borderRadius: '8px', width: '600px', margin: '0 auto' }}>
-      <TextField 
-        placeholder="Pergunta sem título" 
-        variant="outlined" 
-        margin="normal" 
-        style={{ width: '100%' }} 
-        value={questionTitle}
-        onChange={(e) => setQuestionTitle(e.target.value)}
-      />
+      <TextField placeholder="Pergunta sem título" variant="outlined" margin="normal" style={{ width: '100%' }} value={questionTitle} onChange={(e) => setQuestionTitle(e.target.value)} />
       <FormControl variant="outlined" margin="normal" style={{ width: '100%' }}>
         <InputLabel>Tipo de Pergunta</InputLabel>
         <Select value={questionType} onChange={(e) => setQuestionType(e.target.value)} label="Tipo de Pergunta">
@@ -64,7 +57,7 @@ const Form = ({ id, removeForm, updateFormData }) => {
           </RadioGroup>
         </>
       ) : (
-        <TextField placeholder="Texto para resposta" variant="outlined" margin="normal" style={{ width: '100%' }} InputProps={{ readOnly: true }} />
+        <TextField placeholder="Texto para resposta" variant="outlined" margin="normal" style={{ width: '100%' }} InputProps={{ readOnly: true }}/>
       )}
       <div style={{ display: 'flex', alignItems: 'center', marginTop: '16px' }}>
         <IconButton onClick={() => removeForm(id)} color="secondary" aria-label="delete">
@@ -75,4 +68,4 @@ const Form = ({ id, removeForm, updateFormData }) => {
   );
 };
 
-export default Form;
+export default Myformcreatedform;
